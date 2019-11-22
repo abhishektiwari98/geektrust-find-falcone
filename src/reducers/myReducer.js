@@ -1,6 +1,7 @@
 const state = {
     vehicles: null,
-    finalArray: []
+    finalArray: [],
+    resultData: null
 }
 
 const myReducer = (iState=state, action)=>{
@@ -14,6 +15,12 @@ const myReducer = (iState=state, action)=>{
         return ({
             ...iState,
             finalArray: action.payload
+        })
+    }
+    if(action.type==='GET_RESULT'){
+        return ({
+            ...iState,
+            resultData: action.payload
         })
     }
     return iState;

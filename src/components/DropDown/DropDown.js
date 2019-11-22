@@ -21,34 +21,22 @@ class DropDown extends Component {
                         index = i;
                     }
                 }
-            //     let index = fArray.map((item, index)=>{
-            //         if(item.name===this.props.name){
-            //             index = flag;
-            //             return index;
-            //         }
-            //     })
-            // index = flag;
-            // console.log('inddddddddddddexxxxxx', index);
             fArray.splice(index,1);
             this.props.updateFinalArray(fArray);
-            this.setState({radioSelectedValue: null})
-            
+            this.setState({radioSelectedValue: null}) 
+            this.props.calculateTime(this.props.finalArray);
         }}
         this.setState({ dropDownSelectedValue: e.target.value })
     }
     
     radioHandler = (e)=>{
         let {vehicles, planets} = this.props;
-        // console.log(e.target.value, e.target.value==='select');
-       
-
         let distance = ((planets.filter(planet=>planet.name===this.state.dropDownSelectedValue))
                         .map(item => item.distance))[0];
         let max_distance = ((vehicles.filter(vehicle=>vehicle.name===e.target.value)
                         .map(item => item.max_distance)))[0];
         let speed = ((vehicles.filter(vehicle=>vehicle.name===e.target.value)
                     .map(item => item.speed)))[0];
-
 
         if(max_distance >= distance){
             this.setState({radioSelectedValue: e.target.value});
@@ -59,20 +47,8 @@ class DropDown extends Component {
                     distance: distance,
                     planet_name: this.state.dropDownSelectedValue
                 }
-            // console.log('object ', obj);
             let fArray = this.props.finalArray;
-            // console.log('initial fArry', fArray);
             if(fArray.some(person=>person.name===this.props.name)){
-                console.log('ifffffffffffffffffffffffff', this.props.name, fArray);
-                // let flag;
-                // let index = fArray.map((item, index)=>{
-                //     if(item.name===this.props.name){
-                //         flag = index;
-                //         return index;
-                //     }
-                // })
-                // console.log(index);
-                // index = flag;
                 let index;
                 for(let i=0;i<fArray.length;i++){
                     if(fArray[i].name===this.props.name){
@@ -82,25 +58,17 @@ class DropDown extends Component {
                 fArray[index] = obj;
             }
             else{
-                console.log('elseeeeeeeeeeeeeeeeeeeeeeee');
                 fArray.push(obj);
             }
-            // console.log('final fArry', fArray);
             this.props.updateFinalArray(fArray);
             this.props.calculateTime(this.props.finalArray);
         }
         else{
-            // console.log('inside elseeeeeeeeee');
             alert("can't select this one");
         }
-
-        // console.log('#######', this.props);
-        // 
-       
     }
 
     createDropDown = (data)=>{
-        // console.log('data all options', data);
         let elements = data.map((item, index) => {
             return (
                 <option key={index}>{item.name}</option>
@@ -110,7 +78,6 @@ class DropDown extends Component {
     }
 
     createRadioList = (data)=>{
-        // console.log('inside createRadio ', data);
         let elements = data.map((item, index) => {
             return (
                 <li key={index}>
@@ -123,9 +90,7 @@ class DropDown extends Component {
     }
 
     render() {
-        console.log('in render of dropdown-finalArray', this.props.finalArray);
-        // console.log('inside Dropdown ', this.props);
-        // console.log('%%%%%%%%%%%%%%%radio value', this.state.radioSelectedValue);
+        console.log('render of dropdown');
         return (
             <>
                 <select className='drop-down-list' onChange={e => this.handleChange(e)}>

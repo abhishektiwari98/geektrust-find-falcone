@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './header.css';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from 'react-loader-spinner';
 
 class Header extends Component {
     render() {
@@ -11,6 +13,7 @@ class Header extends Component {
                             <a href="#">Home</a>
                             <a href="#">Reset</a>
                         </nav>
+                       
                     </div>
                 </div>
             </>
